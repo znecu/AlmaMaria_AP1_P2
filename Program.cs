@@ -6,6 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+var ConStr = builder.Configuration.GetConnectionString("ConStr");
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
