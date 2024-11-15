@@ -1,4 +1,76 @@
-﻿<h3>Index</h3>
+﻿@page "/Registro/Index"
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
+
+<PageTitle>Index</PageTitle>
+<div class="container">
+    <div class="shadow-lg">
+
+        @*Header*@
+        <div class="card-header">
+            <h5><strong>Registro de </strong></h5>
+        </div>
+
+        @*Body*@
+        <div class="card-body">
+            <div class="row">
+
+                @*Botones e Inputs*@
+                <div class="row">
+                 
+
+                    @*Crear*@
+                    <div class="col 1">
+                        <a href="/Prestamo/Create" class="btn btn-primary">
+                            <span class="bi bi-plus-square-fill-nav-menu mt-3"></span> Crear
+                        </a>
+
+                    </div>
+
+                    @*Tabla*@
+                    <table class="table table-bordered mt-4">
+                        <thead class="table table-striped">
+                            <tr>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @* @foreach () *@
+                            {
+                                <tr>
+                                    <td></td>
+
+                                    @*Observar*@
+                                    <td class="text-center">
+                                        <a href="/Registro/Details/"><button type="button" class=" btn bi bi-eye"></button> </a>
+                                    </td>
+
+                                    @*Editar*@
+                                    <td class="text-center">
+                                        <a href="/Registro/Edit/"><button type="button" class="btn bi bi-pencil"></button></a>
+                                    </td>
+
+                                    @*Eliminar*@
+                                    <td class="text-center">
+                                        <a href="/Registro/Delete/"><button type="button" class="btn bi bi-trash"></button></a>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @*Footer*@
+            <div class="card-footer">
+                <p><strong>Cantidad de : </strong>.Count</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
 
