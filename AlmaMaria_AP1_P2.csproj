@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazor.Bootstrap" Version="3.1.1" />
     <PackageReference Include="Microsoft.entityframeworkcore" Version="9.0.0" />
     <PackageReference Include="Microsoft.entityframeworkcore.sqlserver" Version="9.0.0" />
     <PackageReference Include="Microsoft.entityframeworkcore.tools" Version="9.0.0">
