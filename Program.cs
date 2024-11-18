@@ -1,5 +1,6 @@
 using AlmaMaria_AP1_P2.Components;
 using AlmaMaria_AP1_P2.DAL;
+using AlmaMaria_AP1_P2.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,7 @@ var ConStr = builder.Configuration.GetConnectionString("ConStr");
 builder.Services.AddDbContextFactory<Contexto>(Options => Options.UseSqlServer(ConStr));
 
 builder.Services.AddBlazorBootstrap();
-
+//builder.Services.AddScoped<RegistroServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
