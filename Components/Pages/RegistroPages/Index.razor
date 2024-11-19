@@ -1,5 +1,6 @@
-﻿@page "/Registro/Index"
+﻿@page "/Combo/Index"
 @inject NavigationManager navigationManager
+@inject ComboServices comboServices
 @rendermode InteractiveServer
 
 <PageTitle>Index</PageTitle>
@@ -8,7 +9,7 @@
 
         @*Header*@
         <div class="card-header">
-            <h5><strong>Registro de </strong></h5>
+            <h5><strong>Registro de Combos</strong></h5>
         </div>
 
         @*Body*@
@@ -21,7 +22,7 @@
 
                     @*Crear*@
                     <div class="col 1">
-                        <a href="/Prestamo/Create" class="btn btn-primary">
+                        <a href="/Combo/Create" class="btn btn-primary">
                             <span class="bi bi-plus-square-fill-nav-menu mt-3"></span> Crear
                         </a>
 
@@ -31,30 +32,41 @@
                     <table class="table table-bordered mt-4">
                         <thead class="table table-striped">
                             <tr>
-                                <th></th>
+                                <th>ComboId</th>
+                                <th>Descripci&oacute;n</th>
+                                <th>Fecha</th>
+                                <th>Precio</th>
+                                <th>Estado</th>
+                                <th>Observar</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
 
                             </tr>
                         </thead>
                         <tbody>
 
-                            @* @foreach () *@
+                            @foreach (var combo in ListaCombo)
                             {
                                 <tr>
-                                    <td></td>
+                                    <td>@combo.CombosId</td>
+                                    <td>@combo.Descripcion</td>
+                                    <td>@combo.Fecha</td>
+                                    <td>@combo.Precio</td>
+                                    <td>@combo.Vendido</td>
 
                                     @*Observar*@
                                     <td class="text-center">
-                                        <a href="/Registro/Details/"><button type="button" class=" btn bi bi-eye"></button> </a>
+                                        <a href="/Combo/Details/"><button type="button" class=" btn bi bi-eye"></button> </a>
                                     </td>
 
                                     @*Editar*@
                                     <td class="text-center">
-                                        <a href="/Registro/Edit/"><button type="button" class="btn bi bi-pencil"></button></a>
+                                    <a href="/Combo/Edit/"><button type="button" class="btn bi bi-pencil"></button></a>
                                     </td>
 
                                     @*Eliminar*@
                                     <td class="text-center">
-                                        <a href="/Registro/Delete/"><button type="button" class="btn bi bi-trash"></button></a>
+                                    <a href="/Combo/Delete/"><button type="button" class="btn bi bi-trash"></button></a>
                                     </td>
 
                                 </tr>
@@ -66,12 +78,18 @@
             </div>
             @*Footer*@
             <div class="card-footer">
-                <p><strong>Cantidad de : </strong>.Count</p>
+                <p><strong>Cantidad de combos: </strong>@ListaCombo.Count</p>
             </div>
         </div>
     </div>
 </div>
 
 @code {
+    public Combos Combos { get; set; } = new Combos();
+    public List<Combos> ListaCombo { get; set; } = new List<Combos>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        ListaCombo = await comboServices.Listar(c => c.CombosId > 0);
+    }
 }
