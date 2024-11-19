@@ -1,5 +1,47 @@
-﻿<h3>Create</h3>
+﻿@page "/Combo/Create"
+@inject NavigationManager navigationManager
+@inject ComboServices comboServices
+@inject ArticuloServices articuloServices
+@rendermode InteractiveServer
+<PageTitle>Create</PageTitle>
+<EditForm OnValidSubmit="Guardar">
+    <DataAnnotationsValidator/>
+    
+    <div class=" container">
+        <div class="shadow-lg">
 
+            @*Header*@
+            <div class="card-header">
+                <h5></h5>
+
+            </div>
+
+        </div>
+    </div>
+
+</EditForm>
 @code {
+    public Combos Combos { get; set; } = new Combos();
+    public List<Articulos> ListaArticulo { get; set; } = new List<Articulos>();
+    public string? Mensaje { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        ListaArticulo = await articuloServices.Listar(a => a.ArticuloId > 0);
+    }
+
+    public async Task Guardar()
+    {
+        var creado = await comboServices.Guardar(Combos);
+
+        if (creado)
+        {
+            Mensaje = "Creado correctamente";
+            navigationManager.NavigateTo("/Combo/Index");
+        }
+        else
+        {
+            Mensaje = "No se ha creado correctamente";
+        }
+    }
 }

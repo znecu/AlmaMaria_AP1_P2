@@ -13,7 +13,7 @@ var ConStr = builder.Configuration.GetConnectionString("ConStr");
 builder.Services.AddDbContextFactory<Contexto>(Options => Options.UseSqlServer(ConStr));
 
 builder.Services.AddBlazorBootstrap();
-//builder.Services.AddScoped<RegistroServices>();
+builder.Services.AddScoped<ComboServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
