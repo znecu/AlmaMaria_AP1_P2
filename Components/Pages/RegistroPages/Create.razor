@@ -1,33 +1,70 @@
 ﻿@page "/Combo/Create"
 @inject NavigationManager navigationManager
 @inject ComboServices comboServices
-@inject ArticuloServices articuloServices
 @rendermode InteractiveServer
 <PageTitle>Create</PageTitle>
-<EditForm OnValidSubmit="Guardar">
-    <DataAnnotationsValidator/>
-    
+<EditForm Model="Combos" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
     <div class=" container">
         <div class="shadow-lg">
 
             @*Header*@
             <div class="card-header">
-                <h5></h5>
+                <h3>Crear de Combo</h3>
+            </div>
+            @*Body*@
+            <div class="card-body">
+
+                @*ComboId*@
+                <div class="col-3">
+                    <label class="col-form-label">ComboId</label>
+                    <InputNumber class="form-control" readonly @bind-Value="Combos.CombosId"></InputNumber>
+                </div>
+                @*Descripcion*@
+                <div class="col-3">
+                    <label class="col-form-label">Descripci&oacute;n</label>
+                    <InputText class="form-control" @bind-Value="Combos.Descripcion"></InputText>
+                </div>
+
+                @*Fecha*@
+                <div class="col-3">
+                    <label class="col-form-label">Fecha</label>
+                    <InputDate class="form-control" @bind-Value="Combos.Fecha"></InputDate>
+                </div>
+                @*Precio*@
+                <div class="col-3">
+                    <label class="col-form-label">Precio</label>
+                    <InputNumber class="form-control" @bind-Value="Combos.Precio"></InputNumber>
+                </div>
+
+                @*Vendido*@
+                <div class="col-3">
+                    <label class="col-form-label">Estado</label>
+                    <InputSelect class="form-control" @bind-Value="Combos.Vendido">
+                        <option value="true"> Vendido</option>
+                        <option value="false"> No vendido</option>
+                    </InputSelect>
+                </div>
 
             </div>
-
+            @*footer*@
+            <div class="card-footer text-center mt-2">
+                <a href="/Combo/Index" class="btn btn-secondary"> <span class="bi bi-arrow-left"></span> Volver</a>
+                <button type="submit" class="btn btn-primary bi bi-floppy"> Guardar</button>
+            </div>
         </div>
     </div>
 
 </EditForm>
 @code {
     public Combos Combos { get; set; } = new Combos();
-    public List<Articulos> ListaArticulo { get; set; } = new List<Articulos>();
+    public List<Combos> ListaCombos { get; set; } = new List<Combos>();
     public string? Mensaje { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        ListaArticulo = await articuloServices.Listar(a => a.ArticuloId > 0);
+        ListaCombos = await comboServices.Listar(c => c.CombosId > 0);
     }
 
     public async Task Guardar()
@@ -44,4 +81,6 @@
             Mensaje = "No se ha creado correctamente";
         }
     }
+
+
 }
